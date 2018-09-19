@@ -154,7 +154,12 @@ bool LoadPE()
 		
 		for (; RelocationImage->VirtualAddress != 0;)
 		{
-			/*这里具体为什么还是要看我的补充。。不打算写在这了。*/
+			/*这里具体为什么写
+			#define CountRelocationEntries(dwBlockSize)		\
+			(dwBlockSize -								\
+			sizeof(BASE_RELOCATION_BLOCK)) /			\
+			sizeof(BASE_RELOCATION_ENTRY)
+			就查看这个*/
 			DWORD NumberOfBlocks = (RelocationImage->SizeOfBlock - sizeof(IMAGE_BASE_RELOCATION)) / 2;
 
 			unsigned short * Block = (unsigned short *)((char*)RelocationImage + sizeof(IMAGE_BASE_RELOCATION));
